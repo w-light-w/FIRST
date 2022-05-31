@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>课工场论坛列表</title>
+    <link href="css/bbs.css" rel="stylesheet">
+</head>
+<body>
+<div class="bbs">
+    <header><span>我要发帖</span></header>
+    <section>
+        <ul></ul>
+    </section>
+    <div class="post">
+        <input class="title" placeholder="请输入标题（1-50个字符）">
+        所属版块：<select class="sec"><option>请选择版块</option><option>电子书籍</option><option>新课来了</option><option>新手报到</option><option>职业规划</option></select>
+        <textarea class="content"></textarea>
+        <input class="btn" value="发布">
+    </div>
+</div>
+<script src="js/jquery-3.6.0.js"></script>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var picture=new Array("images/tou01.jpg","images/tou02.jpg","images/tou03.jpg","images/tou04.jpg");
+		$(".bbs header span").click(function(){
+			$(".bbs .post").show();
+		})
+		
+		$(".bbs .post .btn").click(function(){
+			//获取标题的值
+			var $titles=$(".title").val();
+			//获取所属版块的值
+			var $selects=$(".sec").val();
+			//获取文本的值
+			var $contents=$(".content").val();
+			//随机数
+			var rd=Math.floor(Math.random()*4);
+			
+			//图片
+			var $img="<div><img src="+picture[rd]+"></div>";
+			
+			//标题
+			var $h1="<h1>"+$titles+"</h1>";
+			
+			//版块
+			var $ban="<span>版块:"+$selects+"</span>";
+			//发表时间
+			var date=new Date();
+			var $times="<span>发布时间:"+date.toLocaleDateString()+"</span>";
+			var $p="<p>"+$ban+$times+"</p>";
+			
+			//添加到li中
+			var $li="<li>"+$img+$h1+$p+"</li>";
+			
+			//追加到section ul li
+			$(".bbs section ul").append($li);
+			
+			//清空
+			$(".title").val("");
+			$(".sec").val("");
+			$(".content").val("");
+			
+			//隐藏
+			$(".post").hide();
+		})
+	})
+	
+</script>
+</body>
+</html>
